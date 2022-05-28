@@ -1,16 +1,24 @@
 import {
-  useEffect,
   useRef,
   useState,
   useCallback,
+  useLayoutEffect,
 } from 'react';
 
 import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
-const Input = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef(null);
+interface IconProps {
+  size: number
+}
+
+interface Props {
+  name: string;
+  icon: (props: IconProps) => JSX.Element;
+}
+const Input = ({ name, icon: Icon, ...rest }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -27,7 +35,7 @@ const Input = ({ name, icon: Icon, ...rest }) => {
     setIsFilled(!!inputRef.current?.value);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
