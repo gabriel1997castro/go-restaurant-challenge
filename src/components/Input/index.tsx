@@ -15,9 +15,10 @@ interface IconProps {
 
 interface Props {
   name: string;
-  icon: (props: IconProps) => JSX.Element;
+  placeholder: string;
+  icon?: (props: IconProps) => JSX.Element;
 }
-const Input = ({ name, icon: Icon, ...rest }: Props) => {
+const Input = ({ name, icon: Icon, placeholder, ...rest }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
@@ -52,6 +53,7 @@ const Input = ({ name, icon: Icon, ...rest }: Props) => {
         onBlur={handleInputBlur}
         defaultValue={defaultValue}
         ref={inputRef}
+        placeholder={placeholder}
         {...rest}
       />
     </Container>
