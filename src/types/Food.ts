@@ -4,3 +4,8 @@ export type Food = {
   name: string;
   price: string;
 };
+
+export interface FoodApi extends Food {
+  id: number;
+  available: boolean;
+}
